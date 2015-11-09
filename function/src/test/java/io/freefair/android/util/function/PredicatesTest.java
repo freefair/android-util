@@ -26,4 +26,20 @@ public class PredicatesTest {
 		assertFalse(alwaysFalse.test("FooBar"));
 		assertFalse(alwaysFalse.test(66d));
 	}
+
+	@Test
+	public void testNotNull() throws Exception {
+		Predicate<Object> notNull = Predicates.notNull();
+
+		assertTrue(notNull.test("Hallo"));
+		assertFalse(notNull.test(null));
+	}
+
+	@Test
+	public void testIsNull() throws Exception {
+		Predicate<Object> isNull = Predicates.isNull();
+
+		assertTrue(isNull.test(null));
+		assertFalse(isNull.test("test"));
+	}
 }

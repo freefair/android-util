@@ -22,7 +22,7 @@ public final class Predicates {
 	private static final Predicate<?> NOT_NULL = new Predicate<Object>() {
 		@Override
 		public boolean test(Object value) {
-			return value == null;
+			return value != null;
 		}
 	};
 
