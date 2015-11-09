@@ -12,7 +12,3 @@ android {
 		targetCompatibility JavaVersion.VERSION_1_7
 	}
 }
-
-dependencies {
-	testCompile 'junit:junit:4.12'
-}

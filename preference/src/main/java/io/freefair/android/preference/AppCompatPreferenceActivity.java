@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.freefair.android.appcompatPreference;
+package io.freefair.android.preference;
 
 import android.content.Intent;
 import android.content.res.Configuration;
