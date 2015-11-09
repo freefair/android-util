@@ -7,4 +7,12 @@ android:
   - android-23
   - extra
 script: "./gradlew build check"
-
+deploy:
+  provider: releases
+  api_key:
+    secure: P5tGLBTO9gZThD30HkEOGR3zFvJvOOY7EMi2QSDjXDUGNQiqEq2OalolCuyQo0ofLhdMnPzxo6KuMXdrZ6JkSiJiACJ3ILkDtmiIiTRrWDwNjwF2LLiZC/oYBDCmTt8cCgDwq5LTX7DmoJ2YMMCyb5XZ7mMhfocV8bWbRCYmpo46jB18tpCpkkVASBVJ9fskvK7bKQ/ParlPKAph/iHNTyR8H36ynemkJpsHUqkAZjxQshmmbWrsUGQPdzhj2WQ/3YEqqVgHz5wqxt9+LGLpw2/HeFAHI/fiPiabU9u8c3KFyvJGGZC9zZvCKA3jYsweqEWiaDVmd0fuZYP7/RoLi+x4+JTp5asPXbg2EhehQqh2MR6YPIjrPDIuO8uNAIbsfUJusxemqrLeUppwmqHIjfa1TxK6KDjE4przGug9BWHc5+VeuN71CmyhLwIZ7GvRPRRrk3wQZqPzErfU8v7tjoz71JRqwBeps1t3Fp5ActcyaMn+jirEjwHxbWwibg2CfE2gftMwIMCigy0QCg2aWC2CyuTgAfwooldmv0VdfaQR7wP/Oen3sOLI8F6UFTTpZa6WKt8d7vaxMHXpHrOTqJ1SV6L56qFCjOv9WYRSfoU+ViFRyLD9q0ub9b9nrggK+fmyOuWnjoVJ2PRIgXpYSaynxfC3WLpXBnF27BepUuQ=
+  file:
+    - appcompat-preference/build/outputs/aar/appcompat-preference-release.aar
+    - util/build/outputs/aar/util-release.aar
+  on:
+    repo: freefair/android-util
