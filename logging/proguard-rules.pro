@@ -1,3 +1,3 @@
 #Better Logging
--keeppackagenames io.freefair.**
+-keeppackagenames io.freefair.android.**
 -keepattributes SourceFile,LineNumberTable

@@ -1,4 +1,4 @@
-package io.freefair.android.util.log;
+package io.freefair.android.util.logging;
 
 import android.util.Log;
 

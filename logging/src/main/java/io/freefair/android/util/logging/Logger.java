@@ -1,4 +1,4 @@
-package io.freefair.android.util.log;
+package io.freefair.android.util.logging;
 
 /**
  * Created by larsgrefer on 24.11.14.

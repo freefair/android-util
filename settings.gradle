@@ -1,5 +1,5 @@
 rootProject.name = "android-util"
 
-include ':util'
+include ':function'
 include ':logging'
 include ':appcompat-preference'
