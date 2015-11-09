@@ -1,4 +1,4 @@
-package io.freefair.android.util;
+package io.freefair.android.util.function;
 
 /**
  * Created by larsgrefer on 23.06.15.
