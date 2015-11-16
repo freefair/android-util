@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by larsgrefer on 09.11.15.
- */
 public class PredicatesTest {
 
 	@Test

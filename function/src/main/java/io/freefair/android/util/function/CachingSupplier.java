@@ -1,22 +1,25 @@
 package io.freefair.android.util.function;
 
-/**
- * Created by larsgrefer on 23.06.15.
- */
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 public abstract class CachingSupplier<T> implements Supplier<T> {
 
 	private T object;
 
 	@Override
+	@Nullable
 	public T get() {
-		if(object == null)
+		if (object == null)
 			object = create();
 		return object;
 	}
 
+	@Nullable
 	protected abstract T create();
 
-	public static <X> CachingSupplier<X> of(final Supplier<X> baseSupplier){
+	@NonNull
+	public static <X> CachingSupplier<X> of(final Supplier<X> baseSupplier) {
 		return new CachingSupplier<X>() {
 			@Override
 			protected X create() {

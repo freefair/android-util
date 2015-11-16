@@ -1,7 +1,9 @@
 package io.freefair.android.util.function;
 
+import android.support.annotation.NonNull;
+
 /**
- * Created by larsgrefer on 11.10.15.
+ * Static methods for creating or obtaining {@link Predicate Predicates}
  */
 public final class Predicates {
 
@@ -33,32 +35,44 @@ public final class Predicates {
 		}
 	};
 
-
+	/**
+	 * No instances of this class, please.
+	 */
 	private Predicates() {
-
 	}
 
+	/**
+	 * @return A {@link Predicate} which is always true
+	 */
 	@SuppressWarnings("unchecked")
-	public static <T> Predicate<T> alwaysTrue(){
+	@NonNull
+	public static <T> Predicate<T> alwaysTrue() {
 		return (Predicate<T>) TRUE;
 	}
 
+	/**
+	 * @return A {@link Predicate} which is always false
+	 */
 	@SuppressWarnings("unchecked")
-	public static <T> Predicate<T> alwaysFalse(){
+	@NonNull
+	public static <T> Predicate<T> alwaysFalse() {
 		return (Predicate<T>) FALSE;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> Predicate<T> notNull(){
+	@NonNull
+	public static <T> Predicate<T> notNull() {
 		return (Predicate<T>) NOT_NULL;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> Predicate<T> isNull(){
+	@NonNull
+	public static <T> Predicate<T> isNull() {
 		return (Predicate<T>) IS_NULL;
 	}
 
-	public static <T> Predicate<T> isEqual(final Object object){
+	@NonNull
+	public static <T> Predicate<T> isEqual(final Object object) {
 		return new Predicate<T>() {
 			@Override
 			public boolean test(T value) {
@@ -67,7 +81,8 @@ public final class Predicates {
 		};
 	}
 
-	public static <T> Predicate<T> notEquals(final Object object){
+	@NonNull
+	public static <T> Predicate<T> notEquals(final Object object) {
 		return new Predicate<T>() {
 			@Override
 			public boolean test(T value) {
@@ -76,15 +91,16 @@ public final class Predicates {
 		};
 	}
 
-	public static <T> Predicate<T> not(final Predicate<T> predicate){
+	@NonNull
+	public static <T> Predicate<T> not(final Predicate<T> predicate) {
 		return NotPredicate.of(predicate);
 	}
 
-	private static class NotPredicate<T> implements Predicate<T>{
+	private static class NotPredicate<T> implements Predicate<T> {
 
 		private Predicate<T> inner;
 
-		private NotPredicate(Predicate<T> inner){
+		private NotPredicate(Predicate<T> inner) {
 			this.inner = inner;
 		}
 
@@ -93,9 +109,10 @@ public final class Predicates {
 			return !inner.test(value);
 		}
 
-		public static <X> Predicate<X> of(Predicate<X> predicate){
-			if(predicate instanceof NotPredicate)
-				return ((NotPredicate<X>)predicate).inner;
+		@NonNull
+		public static <X> Predicate<X> of(Predicate<X> predicate) {
+			if (predicate instanceof NotPredicate)
+				return ((NotPredicate<X>) predicate).inner;
 			else
 				return new NotPredicate<>(predicate);
 		}

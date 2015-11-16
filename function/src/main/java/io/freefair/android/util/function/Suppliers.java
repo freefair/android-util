@@ -1,12 +1,23 @@
 package io.freefair.android.util.function;
 
-/**
- * Created by larsgrefer on 11.10.15.
- */
-public final class Suppliers {
-	private Suppliers(){}
+import android.support.annotation.NonNull;
 
-	public static <T> Supplier<T> of(final T object){
+/**
+ * Static methods for creating {@link Supplier Suppliers}
+ */
+@SuppressWarnings("unused")
+public final class Suppliers {
+	private Suppliers() {
+	}
+
+	/**
+	 * Create a {@link Supplier} which supplies the given object
+	 *
+	 * @param object The object to supply
+	 * @return A {@link Supplier} supplying the given object
+	 */
+	@NonNull
+	public static <T> Supplier<T> of(final T object) {
 		return new Supplier<T>() {
 			@Override
 			public T get() {
@@ -15,12 +26,14 @@ public final class Suppliers {
 		};
 	}
 
-	public static <T> Supplier<T> cache(final Supplier<T> supplier){
-		return new CachingSupplier<T>() {
-			@Override
-			protected T create() {
-				return supplier.get();
-			}
-		};
+	/**
+	 * Create a {@link Supplier} which caches the value returned by the given supplier.
+	 *
+	 * @param supplier The supplier to cache. {@link Supplier#get() get()} will only called once on this.
+	 * @return
+	 */
+	@NonNull
+	public static <T> Supplier<T> cache(final Supplier<T> supplier) {
+		return CachingSupplier.of(supplier);
 	}
 }
