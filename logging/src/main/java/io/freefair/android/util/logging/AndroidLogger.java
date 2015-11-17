@@ -1,5 +1,6 @@
 package io.freefair.android.util.logging;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 /**
@@ -13,15 +14,23 @@ public class AndroidLogger implements Logger {
 	 */
 	private String tag;
 
-	protected AndroidLogger(String tag){
-		if(tag.length() <= 23) {
+	/**
+	 * @param tag The tag to use for logging
+	 * @throws IllegalArgumentException If the tag is null
+	 */
+	private AndroidLogger(String tag) throws IllegalArgumentException {
+		if (tag == null) {
+			throw new IllegalArgumentException("Tag should not be null");
+		}
+		if (tag.length() <= 23) {
 			this.tag = tag;
 		} else {
-			this.tag = tag.substring(tag.length()-23);
+			this.tag = tag.substring(tag.length() - 23);
 		}
 	}
 
-	protected String getTag(){
+	@NonNull
+	public String getTag() {
 		return tag;
 	}
 
@@ -75,14 +84,39 @@ public class AndroidLogger implements Logger {
 		Log.e(getTag(), text, throwable);
 	}
 
-	public static AndroidLogger withTag(String tag){
+	/**
+	 * Create an {@link AndroidLogger} which uses the given tag.
+	 *
+	 * @param tag The tag to use
+	 * @return A new {@link AndroidLogger}
+	 * @see Log
+	 */
+	@NonNull
+	public static AndroidLogger withTag(String tag) {
 		return new AndroidLogger(tag);
 	}
 
+	/**
+	 * Create an {@link AndroidLogger} which uses the {@link Class#getSimpleName() simple name} of the given class as tag
+	 *
+	 * @param clazz The class to use as tag.
+	 * @return A new {@link AndroidLogger}
+	 * @see #withTag(String)
+	 */
+	@NonNull
 	public static Logger forClass(Class<?> clazz) {
 		return withTag(clazz.getSimpleName());
 	}
 
+	/**
+	 * Create an {@link AndroidLogger} which uses the {@link Class#getSimpleName() simple name}
+	 * of the {@link Object#getClass() class} of the given object
+	 *
+	 * @param object The object to use as tag.
+	 * @return A new {@link AndroidLogger}
+	 * @see #forClass(Class)
+	 */
+	@NonNull
 	public static Logger forObject(Object object) {
 		return forClass(object.getClass());
 	}
