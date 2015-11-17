@@ -34,7 +34,6 @@ public final class Suppliers {
 	 * Create a {@link Supplier} which caches the value returned by the given supplier.
 	 *
 	 * @param supplier The supplier to cache. {@link Supplier#get() get()} will only called once on this.
-	 * @return
 	 */
 	@NonNull
 	public static <T> Supplier<T> cache(final Supplier<T> supplier) {
