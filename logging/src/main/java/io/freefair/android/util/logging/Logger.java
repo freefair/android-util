@@ -1,8 +1,9 @@
 package io.freefair.android.util.logging;
 
 /**
- * Created by larsgrefer on 24.11.14.
+ * A really simple logger interface
  */
+@SuppressWarnings("unused")
 public interface Logger {
 
 	void verbose(String text);

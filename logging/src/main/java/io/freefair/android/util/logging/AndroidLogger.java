@@ -3,13 +3,17 @@ package io.freefair.android.util.logging;
 import android.util.Log;
 
 /**
- * Created by larsgrefer on 06.11.15.
+ * A simple {@link Logger} which logs against {@link Log} with the given tag.
  */
-public class BaseLogger implements Logger {
+@SuppressWarnings("unused")
+public class AndroidLogger implements Logger {
 
-	String tag;
+	/**
+	 * The tag used vor {@link Log}
+	 */
+	private String tag;
 
-	BaseLogger(String tag){
+	protected AndroidLogger(String tag){
 		if(tag.length() <= 23) {
 			this.tag = tag;
 		} else {
@@ -69,5 +73,17 @@ public class BaseLogger implements Logger {
 	@Override
 	public void error(String text, Throwable throwable) {
 		Log.e(getTag(), text, throwable);
+	}
+
+	public static AndroidLogger withTag(String tag){
+		return new AndroidLogger(tag);
+	}
+
+	public static Logger forClass(Class<?> clazz) {
+		return withTag(clazz.getSimpleName());
+	}
+
+	public static Logger forObject(Object object) {
+		return forClass(object.getClass());
 	}
 }
