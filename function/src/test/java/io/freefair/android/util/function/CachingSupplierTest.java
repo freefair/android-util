@@ -23,5 +23,9 @@ public class CachingSupplierTest {
 
 		assertSame(a, b);
 		assertSame(b, c);
+
+		assertEquals("Hallo", a);
+		assertEquals("Hallo", b);
+		assertEquals("Hallo", c);
 	}
 }
