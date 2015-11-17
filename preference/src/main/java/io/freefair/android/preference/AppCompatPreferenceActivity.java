@@ -38,20 +38,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Base class for activities that use the
- * <a href="{@docRoot}tools/extras/support-library.html">support library</a> action bar features.
- *
- * <p>You can add an {@link ActionBar} to your activity when running on API level 7 or higher
- * by extending this class for your activity and setting the activity theme to
- * {@link android.support.v7.appcompat.R.style#Theme_AppCompat Theme.AppCompat} or a similar theme.
- *
- * <div class="special reference">
- * <h3>Developer Guides</h3>
- *
- * <p>For information about how to use the action bar, including how to add action items, navigation
- * modes and more, read the <a href="{@docRoot}guide/topics/ui/actionbar.html">Action
- * Bar</a> API guide.</p>
- * </div>
+ * An {@link android.support.v7.app.AppCompatActivity AppCompatActivity} which extends {@link PreferenceActivity}
+ * instead of {@link android.app.Activity Activity}
  */
 public class AppCompatPreferenceActivity extends PreferenceActivity implements AppCompatCallback,
         TaskStackBuilder.SupportParentable, ActionBarDrawerToggle.DelegateProvider {
