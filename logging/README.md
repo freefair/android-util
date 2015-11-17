@@ -15,6 +15,6 @@ repositories {
 }
 
 dependencies {
-    compile 'io.freefair.android-util:logging:1.0.0'
+    compile 'io.freefair.android-util:logging:1.0.1'
 }
 ```
