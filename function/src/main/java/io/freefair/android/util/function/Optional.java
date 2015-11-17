@@ -3,6 +3,8 @@ package io.freefair.android.util.function;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.NoSuchElementException;
+
 /**
  * A container object which may or may not contain a non-null value.
  * If a value is present, {@link #isPresent()} will return true and {@link #get()} will return the value.
@@ -18,13 +20,14 @@ import android.support.annotation.Nullable;
 @SuppressWarnings("unused")
 public class Optional<T> {
 
+	@Nullable
 	private final T object;
 
 	/**
 	 * @see #of(Object)
 	 * @see #ofNullable(Object)
 	 */
-	private Optional(T obj) {
+	private Optional(@Nullable T obj) {
 		object = obj;
 	}
 
@@ -38,14 +41,16 @@ public class Optional<T> {
 	}
 
 	/**
-	 * @return The value, if its present
-	 * @throws IllegalStateException If the Optional is empty
+	 * If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
+	 * @return the non-null value held by this Optional
+	 * @throws NoSuchElementException if there is no value present
 	 */
-	public T get() throws IllegalStateException {
-		if (isPresent())
+	@NonNull
+	public T get() throws NoSuchElementException {
+		if (object != null)
 			return object;
 		else {
-			throw new IllegalStateException("This optional is empty");
+			throw new NoSuchElementException("This optional is empty");
 		}
 	}
 
@@ -66,19 +71,63 @@ public class Optional<T> {
 	}
 
 	/**
-	 * Maps the value of this {@link Optional} using the given Function
-	 * and wraps the new value into a new {@link Optional}
-	 * <p/>
-	 * If this {@link Optional} is empty, the new {@link Optional} will be empty too.
-	 * If the given function returns null, the new {@link Optional} will be empty.
+	 * Return the value if present, otherwise invoke other and return the result of that invocation.
 	 *
-	 * @param function The function for mapping the
-	 * @param <V>      The type of the new {@link Optional}
-	 * @return The new {@link Optional}
-	 * @throws IllegalArgumentException If function is null
+	 * @param other a Supplier whose result is returned if no value is present
+	 * @return the value if present otherwise the result of other.get()
+	 * @throws NullPointerException if value is not present and other is null
+	 */
+	public T orElseGet(Supplier<? extends T> other) {
+		return isPresent() ? object : other.get();
+	}
+
+	/**
+	 * Return the contained value, if present, otherwise throw an exception to be created by the provided supplier.
+	 *
+	 * @param exceptionSupplier The supplier which will return the exception to be thrown
+	 * @param <X>               Type of the exception to be thrown
+	 * @return the present value
+	 * @throws X                    if there is no value present
+	 * @throws NullPointerException if no value is present and exceptionSupplier is null
 	 */
 	@NonNull
-	public <V> Optional<V> map(@NonNull Function<? super T, V> function) throws IllegalArgumentException {
+	public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
+		if (isPresent()) {
+			return object;
+		} else {
+			throw exceptionSupplier.get();
+		}
+	}
+
+	/**
+	 * If a value is present, and the value matches the given predicate,
+	 * return an Optional describing the value, otherwise return an empty Optional.
+	 *
+	 * @param predicate a predicate to apply to the value, if present
+	 * @return an Optional describing the value of this Optional if a value is present and the value matches the given predicate,
+	 * otherwise an empty Optional
+	 */
+	public Optional<T> filter(Predicate<? super T> predicate) {
+		if (isPresent() && predicate.test(get())) {
+			return Optional.of(get());
+		} else {
+			return empty();
+		}
+	}
+
+	/**
+	 * If a value is present, apply the provided mapping function to it,
+	 * and if the result is non-null, return an Optional describing the result.
+	 * Otherwise return an empty Optional.
+	 *
+	 * @param function a mapping function to apply to the value, if present
+	 * @param <V>      The type of the result of the mapping function
+	 * @return an Optional describing the result of applying a mapping function to the value of this Optional,
+	 * if a value is present, otherwise an empty Optional
+	 * @throws IllegalArgumentException if the mapping function is null
+	 */
+	@NonNull
+	public <V> Optional<V> map(Function<? super T, ? extends V> function) throws IllegalArgumentException {
 		if (function == null)
 			throw new IllegalArgumentException("function was null");
 		else {
@@ -90,9 +139,64 @@ public class Optional<T> {
 		}
 	}
 
-	private final static Optional<?> emptyOptional = new Optional<>(null);
+	/**
+	 * If a value is present, apply the provided Optional-bearing mapping function to it,
+	 * return that result, otherwise return an empty Optional.
+	 * This method is similar to map(Function), but the provided mapper is one whose result is already an Optional,
+	 * and if invoked, flatMap does not wrap it with an additional Optional.
+	 *
+	 * @param function a mapping function to apply to the value, if present the mapping function
+	 * @param <U>      The type parameter to the Optional returned by
+	 * @return the result of applying an Optional-bearing mapping function to the value of this Optional, if a value is present, otherwise an empty Optional
+	 */
+	public <U> Optional<U> flatMap(Function<? super T, Optional<U>> function) {
+		Optional<Optional<U>> optionalOptional = map(function);
+		if (optionalOptional.isPresent()) {
+			return optionalOptional.get();
+		} else {
+			return empty();
+		}
+	}
 
-	public static <X> Optional<X> of(@NonNull X object) {
+	/**
+	 * Indicates whether some other object is "equal to" this Optional. The other object is considered equal if:
+	 * <p/>
+	 * <ul>
+	 * <li>it is also an Optional and;</li>
+	 * <li>both instances have no value present or;</li>
+	 * <li>the present values are "equal to" each other via equals().</li>
+	 * </ul>
+	 *
+	 * @param o an object to be tested for equality
+	 * @return {@code true} if the other object is "equal to" this object otherwise false
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof Optional))
+			return false;
+
+		if (this == o)
+			return true;
+
+		Optional other = (Optional) o;
+
+		if (!this.isPresent() && !other.isPresent()) {
+			return true;
+		} else if (this.isPresent() && other.isPresent()) {
+			return this.get().equals(other.get());
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return object != null ? object.hashCode() : 0;
+	}
+
+	private final static Optional<?> EMPTY_OPTIONAL = new Optional<>(null);
+
+	public static <X> Optional<X> of(X object) {
 		if (object == null)
 			throw new IllegalArgumentException("object was null");
 		else
@@ -116,6 +220,6 @@ public class Optional<T> {
 	@SuppressWarnings("unchecked")
 	@NonNull
 	public static <X> Optional<X> empty() {
-		return (Optional<X>) emptyOptional;
+		return (Optional<X>) EMPTY_OPTIONAL;
 	}
 }

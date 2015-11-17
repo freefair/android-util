@@ -1,5 +1,7 @@
 package io.freefair.android.util.function;
 
+import android.support.annotation.Nullable;
+
 /**
  * Represents a predicate (boolean-valued function) of one argument.
  *
@@ -14,5 +16,5 @@ public interface Predicate<T> {
 	 * @param value the input argument
 	 * @return true if the input argument matches the predicate, otherwise false
 	 */
-	boolean test(T value);
+	boolean test(@Nullable T value);
 }

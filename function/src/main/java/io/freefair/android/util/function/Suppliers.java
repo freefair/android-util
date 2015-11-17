@@ -7,6 +7,10 @@ import android.support.annotation.NonNull;
  */
 @SuppressWarnings("unused")
 public final class Suppliers {
+
+	/**
+	 * No instances
+	 */
 	private Suppliers() {
 	}
 

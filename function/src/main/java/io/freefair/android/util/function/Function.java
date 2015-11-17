@@ -1,5 +1,7 @@
 package io.freefair.android.util.function;
 
+import android.support.annotation.Nullable;
+
 /**
  * Represents a function that accepts one argument and produces a result.
  *
@@ -15,5 +17,6 @@ public interface Function<V, R> {
 	 * @param value the function argument
 	 * @return the function result
 	 */
-	R apply(V value);
+	@Nullable
+	R apply(@Nullable V value);
 }
