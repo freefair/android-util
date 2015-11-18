@@ -1,4 +1,6 @@
 # android-util
+[![Release](https://img.shields.io/github/release/freefair/android-util.svg?label=JitPack)](https://jitpack.io/#io.freefair/android-util)
+
 Android Utility classes
 
 - [logging](logging) -> Simple logging
