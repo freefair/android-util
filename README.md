@@ -15,10 +15,10 @@ repositories {
 
 dependencies {
     // All at once
-    compile 'io.freefair:android-util:1.1.0'
+    compile 'io.freefair:android-util:<version>'
     
     // Only some modules
-    compile 'io.freefair.android-util:logging:1.1.0'
-    compile 'io.freefair.android-util:function:1.1.0'
+    compile 'io.freefair.android-util:logging:<version>'
+    compile 'io.freefair.android-util:function:<version>'
 }
 ```

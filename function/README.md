@@ -15,6 +15,6 @@ repositories {
 }
 
 dependencies {
-    compile 'io.freefair.android-util:function:1.1.0'
+    compile 'io.freefair.android-util:function:<version>'
 }
 ```
