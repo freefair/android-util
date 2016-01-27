@@ -1,20 +1,15 @@
 apply plugin: 'com.android.library'
 
 android {
-
-	defaultConfig {
-		minSdkVersion 1
-	}
-
-	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_7
-		targetCompatibility JavaVersion.VERSION_1_7
-	}
+    defaultConfig {
+        minSdkVersion 1
+        targetSdkVersion 23
+    }
 }
 
 dependencies {
-	compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.android.support:support-annotations:23.1.1'
 
-	testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:1.+"
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.10.19"
 }

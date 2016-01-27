@@ -15,6 +15,6 @@ repositories {
 }
 
 dependencies {
-    compile 'io.freefair.android-util:preference:1.0.1'
+    compile 'io.freefair.android-util:preference:<version>'
 }
 ```
