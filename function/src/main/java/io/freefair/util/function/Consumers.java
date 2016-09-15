@@ -1,6 +1,7 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
-import android.support.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Static functions for creating Consumers
@@ -23,7 +24,7 @@ public class Consumers {
      * @return a {@link Consumer} which does nothing
      */
     @SuppressWarnings("unchecked")
-    @NonNull
+    @NotNull
     public static <T> Consumer<T> nothing(){
         return (Consumer<T>) NOTHING;
     }
@@ -39,7 +40,7 @@ public class Consumers {
      * @return a composed Consumer that performs in sequence the first operation followed by the second operation
      * @throws NullPointerException if first or second is null;
      */
-    @NonNull
+    @NotNull
     public static <T> Consumer<T> chain(final Consumer<? super T> first, final Consumer<? super T> second) {
         return new Consumer<T>() {
             @Override
@@ -59,7 +60,7 @@ public class Consumers {
      * @param <T>       the input type of the predicate and of the new consumer
      * @return a Consumer representation of the given predicate
      */
-    @NonNull
+    @NotNull
     public static <T> Consumer<T> ofPredicate(final Predicate<T> predicate) {
         return new Consumer<T>() {
             @Override
@@ -78,7 +79,7 @@ public class Consumers {
      * @param <T>      the input type of the function and of the new consumer
      * @return a Consumer representation of the given function
      */
-    @NonNull
+    @NotNull
     public static <T> Consumer<T> ofFunction(final Function<T, ?> function) {
         return new Consumer<T>() {
             @Override

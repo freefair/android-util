@@ -1,7 +1,7 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -48,7 +48,7 @@ public final class Predicates {
 	 * @return A {@link Predicate} which is always true
 	 */
 	@SuppressWarnings("unchecked")
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> alwaysTrue() {
 		return (Predicate<T>) TRUE;
 	}
@@ -57,7 +57,7 @@ public final class Predicates {
 	 * @return A {@link Predicate} which is always false
 	 */
 	@SuppressWarnings("unchecked")
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> alwaysFalse() {
 		return (Predicate<T>) FALSE;
 	}
@@ -66,7 +66,7 @@ public final class Predicates {
 	 * @return A {@link Predicate} which is true, if its input is not null
 	 */
 	@SuppressWarnings("unchecked")
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> notNull() {
 		return (Predicate<T>) NOT_NULL;
 	}
@@ -75,7 +75,7 @@ public final class Predicates {
 	 * @return A {@link Predicate} which is true, if its input is null
 	 */
 	@SuppressWarnings("unchecked")
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> isNull() {
 		return (Predicate<T>) IS_NULL;
 	}
@@ -87,7 +87,7 @@ public final class Predicates {
 	 * @param <T>    the type of arguments to the predicate
 	 * @return a predicate that tests if two arguments are equal according to {@link Objects#equals(Object, Object)}
 	 */
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> isEqual(@Nullable final Object object) {
 		return new Predicate<T>() {
 			@Override
@@ -104,7 +104,7 @@ public final class Predicates {
 	 * @param <T>    the type of arguments to the predicate
 	 * @return a predicate that tests if two arguments are not equal according to {@link Objects#equals(Object, Object)}
 	 */
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> notEquals(@Nullable final Object object) {
 		Predicate<T> equal = isEqual(object);
 		return not(equal);
@@ -117,7 +117,7 @@ public final class Predicates {
 	 * @param <T>
 	 * @return a predicate that represents the logical negation of the given predicate
 	 */
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> not(final Predicate<T> predicate) {
 		return NotPredicate.of(predicate);
 	}
@@ -134,7 +134,7 @@ public final class Predicates {
 	 * @param <T>    common super type of both predicates
 	 * @return a composed predicate that represents the short-circuiting logical AND of the two predicates
 	 */
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> and(final Predicate<? super T> first, final Predicate<? super T> second) {
 		return new Predicate<T>() {
 			@Override
@@ -156,7 +156,7 @@ public final class Predicates {
 	 * @param <T> common super type of both predicates
 	 * @return a composed predicate that represents the short-circuiting logical OR of the two predicates
 	 */
-	@NonNull
+	@NotNull
 	public static <T> Predicate<T> or(final Predicate<? super T> a, final Predicate<? super T> b) {
 		return new Predicate<T>() {
 			@Override
@@ -171,7 +171,7 @@ public final class Predicates {
 	 */
 	private static class NotPredicate<T> implements Predicate<T> {
 
-		private Predicate<T> inner;
+		private final Predicate<T> inner;
 
 		private NotPredicate(Predicate<T> inner) {
 			this.inner = inner;
@@ -182,7 +182,7 @@ public final class Predicates {
 			return !inner.test(value);
 		}
 
-		@NonNull
+		@NotNull
 		public static <X> Predicate<X> of(Predicate<X> predicate) {
 			if (predicate instanceof NotPredicate)
 				return ((NotPredicate<X>) predicate).inner;

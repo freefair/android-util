@@ -1,6 +1,6 @@
 # util/function
 
-Functional Interfaces like in java 8, but for Android:
+Functional Interfaces like in java 8, but for Android/Java 7:
 - `Optional<T>`
 - `Supplier<T>`
 - `Function<V,R>`

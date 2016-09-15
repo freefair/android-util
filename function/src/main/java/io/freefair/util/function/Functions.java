@@ -1,6 +1,6 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
-import android.support.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Static methods for creating {@link Function functions}

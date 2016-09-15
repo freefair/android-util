@@ -1,7 +1,7 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class CachingSupplier<T> implements Supplier<T> {
 
@@ -38,7 +38,7 @@ public abstract class CachingSupplier<T> implements Supplier<T> {
 	/**
 	 * @see Suppliers#cache(Supplier)
 	 */
-	@NonNull
+	@NotNull
 	public static <X> CachingSupplier<X> of(final Supplier<X> innerSupplier) {
 		return new CachingSupplier<X>() {
 			@Override

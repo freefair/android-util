@@ -1,23 +1,25 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
+import io.freefair.util.function.Predicates;
+
 import static org.junit.Assert.*;
 
 public class OptionalTest {
 
-	Optional empty;
-	Optional notEmpty;
-	Optional notEmpty2;
+	io.freefair.util.function.Optional empty;
+	io.freefair.util.function.Optional notEmpty;
+	io.freefair.util.function.Optional notEmpty2;
 
 	@Before
 	public void setUp() throws Exception {
-		empty = Optional.empty();
-		notEmpty = Optional.of("Hallo");
-		notEmpty2 = Optional.of(2);
+		empty = io.freefair.util.function.Optional.empty();
+		notEmpty = io.freefair.util.function.Optional.of("Hallo");
+		notEmpty2 = io.freefair.util.function.Optional.of(2);
 	}
 
 	@Test
@@ -66,8 +68,8 @@ public class OptionalTest {
 
 	@Test
 	public void testFilter() throws Exception {
-		assertFalse(empty.filter(Predicates.alwaysTrue()).isPresent());
-		assertTrue(notEmpty.filter(Predicates.alwaysTrue()).isPresent());
+		assertFalse(empty.filter(io.freefair.util.function.Predicates.alwaysTrue()).isPresent());
+		assertTrue(notEmpty.filter(io.freefair.util.function.Predicates.alwaysTrue()).isPresent());
 		assertFalse(notEmpty.filter(Predicates.alwaysFalse()).isPresent());
 	}
 
@@ -83,7 +85,7 @@ public class OptionalTest {
 
 	@Test
 	public void testEquals() throws Exception {
-		assertTrue(empty.equals(Optional.empty()));
+		assertTrue(empty.equals(io.freefair.util.function.Optional.empty()));
 		assertFalse(notEmpty.equals(notEmpty2));
 		assertFalse(empty.equals(notEmpty));
 	}
@@ -96,6 +98,6 @@ public class OptionalTest {
 
 	@Test
 	public void testEmpty() throws Exception {
-		assertFalse(Optional.empty().isPresent());
+		assertFalse(io.freefair.util.function.Optional.empty().isPresent());
 	}
 }

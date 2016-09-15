@@ -1,10 +1,9 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +21,7 @@ public class SuppliersTest {
 		objects.add(new ArithmeticException());
 
 		for (Object obj : objects) {
-			assertSame(obj, Suppliers.of(obj).get());
+			assertSame(obj, io.freefair.util.function.Suppliers.of(obj).get());
 		}
 
 

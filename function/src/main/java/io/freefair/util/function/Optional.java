@@ -1,7 +1,8 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.NoSuchElementException;
 
@@ -45,7 +46,7 @@ public class Optional<T> {
 	 * @return the non-null value held by this Optional
 	 * @throws NoSuchElementException if there is no value present
 	 */
-	@NonNull
+	@NotNull
 	public T get() throws NoSuchElementException {
 		if (object != null)
 			return object;
@@ -90,7 +91,7 @@ public class Optional<T> {
 	 * @throws X                    if there is no value present
 	 * @throws NullPointerException if no value is present and exceptionSupplier is null
 	 */
-	@NonNull
+	@NotNull
 	public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
 		if (isPresent()) {
 			return object;
@@ -126,7 +127,7 @@ public class Optional<T> {
 	 * if a value is present, otherwise an empty Optional
 	 * @throws IllegalArgumentException if the mapping function is null
 	 */
-	@NonNull
+	@NotNull
 	public <V> Optional<V> map(Function<? super T, ? extends V> function) throws IllegalArgumentException {
 		if (function == null)
 			throw new IllegalArgumentException("function was null");
@@ -204,7 +205,7 @@ public class Optional<T> {
 	}
 
 
-	@NonNull
+	@NotNull
 	public static <X> Optional<X> ofNullable(@Nullable X object) {
 		if (object == null)
 			return Optional.empty();
@@ -218,7 +219,7 @@ public class Optional<T> {
 	 * @return An Optional, which is empty
 	 */
 	@SuppressWarnings("unchecked")
-	@NonNull
+	@NotNull
 	public static <X> Optional<X> empty() {
 		return (Optional<X>) EMPTY_OPTIONAL;
 	}

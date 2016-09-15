@@ -1,6 +1,8 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
 import org.junit.Test;
+
+import io.freefair.util.function.Predicates;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +10,7 @@ public class PredicatesTest {
 
 	@Test
 	public void testAlwaysTrue() {
-		Predicate<Object> alwaysTrue = Predicates.alwaysTrue();
+		io.freefair.util.function.Predicate<Object> alwaysTrue = io.freefair.util.function.Predicates.alwaysTrue();
 
 		assertTrue(alwaysTrue.test(null));
 		assertTrue(alwaysTrue.test("Hallo"));
@@ -17,7 +19,7 @@ public class PredicatesTest {
 
 	@Test
 	public void testAlwaysFalse() {
-		Predicate<Object> alwaysFalse = Predicates.alwaysFalse();
+		io.freefair.util.function.Predicate<Object> alwaysFalse = io.freefair.util.function.Predicates.alwaysFalse();
 
 		assertFalse(alwaysFalse.test(null));
 		assertFalse(alwaysFalse.test("FooBar"));
@@ -26,7 +28,7 @@ public class PredicatesTest {
 
 	@Test
 	public void testNotNull() throws Exception {
-		Predicate<Object> notNull = Predicates.notNull();
+		io.freefair.util.function.Predicate<Object> notNull = io.freefair.util.function.Predicates.notNull();
 
 		assertTrue(notNull.test("Hallo"));
 		assertFalse(notNull.test(null));
@@ -34,7 +36,7 @@ public class PredicatesTest {
 
 	@Test
 	public void testIsNull() throws Exception {
-		Predicate<Object> isNull = Predicates.isNull();
+		io.freefair.util.function.Predicate<Object> isNull = Predicates.isNull();
 
 		assertTrue(isNull.test(null));
 		assertFalse(isNull.test("test"));

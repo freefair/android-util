@@ -1,6 +1,6 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
-import android.support.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Static methods for creating {@link Supplier Suppliers}
@@ -20,7 +20,7 @@ public final class Suppliers {
 	 * @param object The object to supply
 	 * @return A {@link Supplier} supplying the given object
 	 */
-	@NonNull
+	@NotNull
 	public static <T> Supplier<T> of(final T object) {
 		return new Supplier<T>() {
 			@Override
@@ -35,8 +35,8 @@ public final class Suppliers {
 	 *
 	 * @param supplier The supplier to cache. {@link Supplier#get() get()} will only called once on this.
 	 */
-	@NonNull
+	@NotNull
 	public static <T> Supplier<T> cache(final Supplier<T> supplier) {
-		return CachingSupplier.of(supplier);
+		return io.freefair.util.function.CachingSupplier.of(supplier);
 	}
 }

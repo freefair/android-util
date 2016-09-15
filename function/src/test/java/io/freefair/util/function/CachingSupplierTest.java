@@ -1,6 +1,8 @@
-package io.freefair.android.util.function;
+package io.freefair.util.function;
 
 import org.junit.Test;
+
+import io.freefair.util.function.Suppliers;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -9,11 +11,11 @@ public class CachingSupplierTest {
 
 	@Test
 	public void testGet() throws Exception {
-		Supplier innerSupplier = mock(Supplier.class);
+		io.freefair.util.function.Supplier innerSupplier = mock(io.freefair.util.function.Supplier.class);
 
 		when(innerSupplier.get()).thenReturn("Hallo");
 
-		Supplier cache = Suppliers.cache(innerSupplier);
+		io.freefair.util.function.Supplier cache = Suppliers.cache(innerSupplier);
 
 		Object a = cache.get();
 		Object b = cache.get();
