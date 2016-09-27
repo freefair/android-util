@@ -12,11 +12,11 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface Supplier<T> {
 
-	/**
-	 * Get a result.
-	 *
-	 * @return a result
-	 */
-	@Nullable
-	T get();
+    /**
+     * Get a result.
+     *
+     * @return a result
+     */
+    @Nullable
+    T get();
 }

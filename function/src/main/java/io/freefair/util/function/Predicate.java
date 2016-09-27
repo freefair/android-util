@@ -10,11 +10,11 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface Predicate<T> {
 
-	/**
-	 * Evaluates this predicate on the given argument.
-	 *
-	 * @param value the input argument
-	 * @return true if the input argument matches the predicate, otherwise false
-	 */
-	boolean test(@Nullable T value);
+    /**
+     * Evaluates this predicate on the given argument.
+     *
+     * @param value the input argument
+     * @return true if the input argument matches the predicate, otherwise false
+     */
+    boolean test(@Nullable T value);
 }

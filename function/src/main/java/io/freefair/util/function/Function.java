@@ -11,12 +11,12 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface Function<V, R> {
 
-	/**
-	 * Applies this function to the given argument.
-	 *
-	 * @param value the function argument
-	 * @return the function result
-	 */
-	@Nullable
-	R apply(@Nullable V value);
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param value the function argument
+     * @return the function result
+     */
+    @Nullable
+    R apply(@Nullable V value);
 }

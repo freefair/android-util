@@ -3,13 +3,16 @@ package io.freefair.util.function;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PRIVATE;
+
 /**
  * Static functions for creating Consumers
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
+@NoArgsConstructor(access = PRIVATE)
 public class Consumers {
-
-    private Consumers() {
-    }
 
     private static final Consumer<?> NOTHING = new Consumer<Object>() {
         @Override
@@ -25,7 +28,7 @@ public class Consumers {
      */
     @SuppressWarnings("unchecked")
     @NotNull
-    public static <T> Consumer<T> nothing(){
+    public static <T> Consumer<T> nothing() {
         return (Consumer<T>) NOTHING;
     }
 
