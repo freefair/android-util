@@ -19,34 +19,3 @@ allprojects {
     group = 'io.freefair'
     version = rootProject.version
 }
-
-subprojects { Project sp ->
-
-    sp.pluginManager.withPlugin('com.android.library') {
-        sp.with {
-            apply plugin: 'com.android.library'
-
-            android {
-                compileSdkVersion 24
-                buildToolsVersion "24.0.1"
-
-                defaultConfig {
-                    versionCode 1
-                    versionName project.version
-                }
-
-                compileOptions {
-                    sourceCompatibility JavaVersion.VERSION_1_7
-                    targetCompatibility JavaVersion.VERSION_1_7
-                }
-            }
-
-            dependencies {
-                testCompile 'junit:junit:4.12'
-            }
-
-            apply plugin: 'com.github.dcendents.android-maven'
-            apply plugin: 'io.freefair.android-maven-jars'
-        }
-    }
-}
