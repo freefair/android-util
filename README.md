@@ -2,7 +2,6 @@
 
 Android Utility classes
 
-- [logging](logging) -> Simple logging
 - [preference](preference) -> AppCompatPreferenceActivity
 - [function](function) -> Functional Interfaces
 
@@ -18,7 +17,6 @@ dependencies {
     compile 'io.freefair:android-util:<version>'
     
     // Only some modules
-    compile 'io.freefair.android-util:logging:<version>'
     compile 'io.freefair.android-util:function:<version>'
 }
 ```
