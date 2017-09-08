@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'io.freefair.android-maven-jars'
+apply plugin: 'io.freefair.android-pmd'
 
 android {
     compileSdkVersion 25
@@ -23,5 +26,3 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'io.freefair.android-maven-jars'
