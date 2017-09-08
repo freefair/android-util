@@ -1,18 +1,17 @@
 package io.freefair.util.function;
 
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.NoSuchElementException;
 
 /**
  * A container object which may or may not contain a non-null value.
  * If a value is present, {@link #isPresent()} will return true and {@link #get()} will return the value.
- * <p/>
+ * <p>
  * Additional methods that depend on the presence or absence of a contained value are provided,
  * such as {@link #orElse(Object)} (return a default value if value not present).
- * <p/>
+ * <p>
  * This is a value-based class; use of identity-sensitive operations (including reference equality (==), identity hash code, or synchronization) on instances of Optional may have unpredictable results and should be avoided.
  *
  * @param <T> The type of the contained value.
@@ -47,11 +46,11 @@ public class Optional<T> {
      * @return the non-null value held by this Optional
      * @throws NoSuchElementException if there is no value present
      */
-    @NotNull
+    @NonNull
     public T get() throws NoSuchElementException {
-        if (object != null)
+        if (object != null) {
             return object;
-        else {
+        } else {
             throw new NoSuchElementException("This optional is empty");
         }
     }
@@ -93,7 +92,7 @@ public class Optional<T> {
      * @throws NullPointerException if no value is present and exceptionSupplier is null
      */
     @SuppressWarnings("ConstantConditions")
-    @NotNull
+    @NonNull
     public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
         if (isPresent()) {
             return object;
@@ -129,11 +128,11 @@ public class Optional<T> {
      * if a value is present, otherwise an empty Optional
      * @throws IllegalArgumentException if the mapping function is null
      */
-    @NotNull
+    @NonNull
     public <V> Optional<V> map(Function<? super T, ? extends V> function) throws IllegalArgumentException {
-        if (function == null)
+        if (function == null) {
             throw new IllegalArgumentException("function was null");
-        else {
+        } else {
             if (isPresent()) {
                 return Optional.ofNullable(function.apply(get()));
             } else {
@@ -163,7 +162,6 @@ public class Optional<T> {
 
     /**
      * Indicates whether some other object is "equal to" this Optional. The other object is considered equal if:
-     * <p/>
      * <ul>
      * <li>it is also an Optional and;</li>
      * <li>both instances have no value present or;</li>
@@ -175,11 +173,13 @@ public class Optional<T> {
      */
     @Override
     public boolean equals(Object o) {
-        if (o == null || !(o instanceof Optional))
+        if (o == null || !(o instanceof Optional)) {
             return false;
+        }
 
-        if (this == o)
+        if (this == o) {
             return true;
+        }
 
         Optional other = (Optional) o;
 
@@ -200,19 +200,21 @@ public class Optional<T> {
     private final static Optional<?> EMPTY_OPTIONAL = new Optional<>(null);
 
     public static <X> Optional<X> of(X object) {
-        if (object == null)
+        if (object == null) {
             throw new IllegalArgumentException("object was null");
-        else
+        } else {
             return new Optional<>(object);
+        }
     }
 
 
-    @NotNull
+    @NonNull
     public static <X> Optional<X> ofNullable(@Nullable X object) {
-        if (object == null)
+        if (object == null) {
             return Optional.empty();
-        else
+        } else {
             return new Optional<>(object);
+        }
     }
 
     /**
@@ -221,7 +223,7 @@ public class Optional<T> {
      * @return An Optional, which is empty
      */
     @SuppressWarnings("unchecked")
-    @NotNull
+    @NonNull
     public static <X> Optional<X> empty() {
         return (Optional<X>) EMPTY_OPTIONAL;
     }

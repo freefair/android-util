@@ -2,43 +2,60 @@ package io.freefair.util.function;
 
 import org.junit.Test;
 
-import io.freefair.util.function.Predicates;
+import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static io.freefair.util.function.Predicates.not;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PredicatesTest {
 
-	@Test
-	public void testAlwaysTrue() {
-		io.freefair.util.function.Predicate<Object> alwaysTrue = io.freefair.util.function.Predicates.alwaysTrue();
+    @Test
+    public void testNotEquals() throws Exception {
+        Predicate<Object> predicate = Predicates.notEquals("foo");
 
-		assertTrue(alwaysTrue.test(null));
-		assertTrue(alwaysTrue.test("Hallo"));
-		assertTrue(alwaysTrue.test(55l));
-	}
+        assertThat(predicate.test("foo")).isFalse();
+        assertThat(predicate.test("bar")).isTrue();
+        assertThat(predicate.test(null)).isTrue();
+    }
 
-	@Test
-	public void testAlwaysFalse() {
-		io.freefair.util.function.Predicate<Object> alwaysFalse = io.freefair.util.function.Predicates.alwaysFalse();
+    @Test
+    public void testAlwaysTrue() {
+        Predicate<Object> alwaysTrue = Predicates.alwaysTrue();
 
-		assertFalse(alwaysFalse.test(null));
-		assertFalse(alwaysFalse.test("FooBar"));
-		assertFalse(alwaysFalse.test(66d));
-	}
+        assertThat(alwaysTrue.test(null)).isTrue();
+        assertThat(alwaysTrue.test("Hallo")).isTrue();
+        assertThat(alwaysTrue.test(55l)).isTrue();
+    }
 
-	@Test
-	public void testNotNull() throws Exception {
-		io.freefair.util.function.Predicate<Object> notNull = io.freefair.util.function.Predicates.notNull();
+    @Test
+    public void testAlwaysFalse() {
+        Predicate<Object> alwaysFalse = Predicates.alwaysFalse();
 
-		assertTrue(notNull.test("Hallo"));
-		assertFalse(notNull.test(null));
-	}
+        assertThat(alwaysFalse.test(null)).isFalse();
+        assertThat(alwaysFalse.test("FooBar")).isFalse();
+        assertThat(alwaysFalse.test(66d)).isFalse();
+    }
 
-	@Test
-	public void testIsNull() throws Exception {
-		io.freefair.util.function.Predicate<Object> isNull = Predicates.isNull();
+    @Test
+    public void testNotNull() throws Exception {
+        Predicate<Object> notNull = Predicates.notNull();
 
-		assertTrue(isNull.test(null));
-		assertFalse(isNull.test("test"));
-	}
+        assertThat(notNull.test("Hallo")).isTrue();
+        assertThat(notNull.test(null)).isFalse();
+    }
+
+    @Test
+    public void testIsNull() throws Exception {
+        Predicate<Object> isNull = Predicates.isNull();
+
+        assertThat(isNull.test(null)).isTrue();
+        assertThat(isNull.test("test")).isFalse();
+    }
+
+    @Test
+    public void testNotNot() {
+        for (Predicate<Object> predicate : Arrays.asList(Predicates.alwaysFalse(), Predicates.alwaysTrue())) {
+            assertThat(not(not(predicate))).isSameAs(predicate);
+        }
+    }
 }

@@ -1,17 +1,14 @@
 package io.freefair.util.function;
 
+import android.support.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
-
-import lombok.NoArgsConstructor;
-
-import static lombok.AccessLevel.PRIVATE;
+import lombok.experimental.UtilityClass;
 
 /**
  * Static functions for creating Consumers
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-@NoArgsConstructor(access = PRIVATE)
+@UtilityClass
 public class Consumers {
 
     private static final Consumer<?> NOTHING = new Consumer<Object>() {
@@ -27,7 +24,7 @@ public class Consumers {
      * @return a {@link Consumer} which does nothing
      */
     @SuppressWarnings("unchecked")
-    @NotNull
+    @NonNull
     public static <T> Consumer<T> nothing() {
         return (Consumer<T>) NOTHING;
     }
@@ -43,7 +40,7 @@ public class Consumers {
      * @return a composed Consumer that performs in sequence the first operation followed by the second operation
      * @throws NullPointerException if first or second is null;
      */
-    @NotNull
+    @NonNull
     public static <T> Consumer<T> chain(final Consumer<? super T> first, final Consumer<? super T> second) {
         return new Consumer<T>() {
             @Override
@@ -56,14 +53,14 @@ public class Consumers {
 
     /**
      * Create a {@link Consumer} which represents the given predicate.
-     * <p/>
+     * <p>
      * The return value of {@link Predicate#test(Object)} is ignored.
      *
      * @param predicate the predicate to convert.
      * @param <T>       the input type of the predicate and of the new consumer
      * @return a Consumer representation of the given predicate
      */
-    @NotNull
+    @NonNull
     public static <T> Consumer<T> ofPredicate(final Predicate<T> predicate) {
         return new Consumer<T>() {
             @Override
@@ -75,14 +72,14 @@ public class Consumers {
 
     /**
      * Create a {@link Consumer} which represents the given function.
-     * <p/>
+     * <p>
      * The return value of {@link Function#apply(Object)} is ignored.
      *
      * @param function the function to convert.
      * @param <T>      the input type of the function and of the new consumer
      * @return a Consumer representation of the given function
      */
-    @NotNull
+    @NonNull
     public static <T> Consumer<T> ofFunction(final Function<T, ?> function) {
         return new Consumer<T>() {
             @Override

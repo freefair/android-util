@@ -5,99 +5,99 @@ import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
-import io.freefair.util.function.Predicates;
-
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OptionalTest {
 
-	io.freefair.util.function.Optional empty;
-	io.freefair.util.function.Optional notEmpty;
-	io.freefair.util.function.Optional notEmpty2;
+    private Optional empty;
+    private Optional notEmpty;
+    private Optional notEmpty2;
 
-	@Before
-	public void setUp() throws Exception {
-		empty = io.freefair.util.function.Optional.empty();
-		notEmpty = io.freefair.util.function.Optional.of("Hallo");
-		notEmpty2 = io.freefair.util.function.Optional.of(2);
-	}
+    @Before
+    public void setUp() throws Exception {
+        empty = Optional.empty();
+        notEmpty = Optional.of("Hallo");
+        notEmpty2 = Optional.of(2);
+    }
 
-	@Test
-	public void testIsPresent() throws Exception {
-		assertFalse(empty.isPresent());
-		assertTrue(notEmpty.isPresent());
-		assertTrue(notEmpty2.isPresent());
-	}
+    @Test
+    public void testIsPresent() throws Exception {
+        assertThat(empty.isPresent()).isFalse();
+        assertThat(notEmpty.isPresent()).isTrue();
+        assertThat(notEmpty2.isPresent()).isTrue();
+    }
 
-	@Test
-	public void testGet() throws Exception {
-		assertNotNull(notEmpty.get());
-		assertNotNull(notEmpty2.get());
-	}
+    @Test
+    public void testGet() throws Exception {
+        assertThat(notEmpty.get()).isNotNull();
+        assertThat(notEmpty2.get()).isNotNull();
+    }
 
-	@Test(expected = NoSuchElementException.class)
-	public void testGetOnEmtpy() throws Exception {
-		empty.get();
-	}
+    @Test(expected = NoSuchElementException.class)
+    public void testGetOnEmtpy() throws Exception {
+        empty.get();
+    }
 
-	@Test
-	public void testOrNull() throws Exception {
-		assertNull(empty.orNull());
-		assertNotNull(notEmpty.orNull());
-		assertNotNull(notEmpty2.orNull());
-	}
+    @Test
+    public void testOrNull() throws Exception {
+        assertThat(empty.orNull()).isNull();
+        assertThat(notEmpty.orNull()).isNotNull();
+        assertThat(notEmpty2.orNull()).isNotNull();
+    }
 
-	@Test
-	public void testOrElse() throws Exception {
-		Object _else = "B";
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testOrElse() throws Exception {
+        Object _else = "B";
 
-		assertEquals(_else, empty.orElse(_else));
-		assertNotEquals(_else, notEmpty.orElse(_else));
-		assertNotEquals(_else, notEmpty2.orElse(_else));
-	}
+        assertThat(empty.orElse(_else)).isEqualTo(_else);
+        assertThat(notEmpty.orElse(_else)).isNotEqualTo(_else);
+        assertThat(notEmpty2.orElse(_else)).isNotEqualTo(_else);
+    }
 
-	@Test
-	public void testOrElseGet() throws Exception {
+    @Test
+    public void testOrElseGet() throws Exception {
 
-	}
+    }
 
-	@Test
-	public void testOrElseThrow() throws Exception {
+    @Test
+    public void testOrElseThrow() throws Exception {
 
-	}
+    }
 
-	@Test
-	public void testFilter() throws Exception {
-		assertFalse(empty.filter(io.freefair.util.function.Predicates.alwaysTrue()).isPresent());
-		assertTrue(notEmpty.filter(io.freefair.util.function.Predicates.alwaysTrue()).isPresent());
-		assertFalse(notEmpty.filter(Predicates.alwaysFalse()).isPresent());
-	}
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testFilter() throws Exception {
+        assertThat(empty.filter(Predicates.alwaysTrue()).isPresent()).isFalse();
+        assertThat(notEmpty.filter(Predicates.alwaysTrue()).isPresent()).isTrue();
+        assertThat(notEmpty.filter(Predicates.alwaysFalse()).isPresent()).isFalse();
+    }
 
-	@Test
-	public void testMap() throws Exception {
+    @Test
+    public void testMap() throws Exception {
 
-	}
+    }
 
-	@Test
-	public void testFlatMap() throws Exception {
+    @Test
+    public void testFlatMap() throws Exception {
 
-	}
+    }
 
-	@Test
-	public void testEquals() throws Exception {
-		assertTrue(empty.equals(io.freefair.util.function.Optional.empty()));
-		assertFalse(notEmpty.equals(notEmpty2));
-		assertFalse(empty.equals(notEmpty));
-	}
+    @Test
+    public void testEquals() throws Exception {
+        assertThat(empty).isEqualTo(Optional.empty());
+        assertThat(notEmpty).isNotEqualTo(notEmpty2);
+        assertThat(notEmpty).isNotEqualTo(empty);
+    }
 
-	@Test
-	public void testHashCode() throws Exception {
-		assertEquals(0, empty.hashCode());
-		assertEquals(notEmpty.get().hashCode(), notEmpty.hashCode());
-	}
+    @Test
+    public void testHashCode() throws Exception {
+        assertThat(empty.hashCode()).isEqualTo(0);
+        assertThat(notEmpty.get().hashCode()).isEqualTo(notEmpty.hashCode());
+    }
 
-	@Test
-	public void testEmpty() throws Exception {
-		assertFalse(io.freefair.util.function.Optional.empty().isPresent());
-	}
+    @Test
+    public void testEmpty() throws Exception {
+        assertThat(Optional.empty().isPresent()).isFalse();
+    }
 }

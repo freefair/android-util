@@ -1,18 +1,16 @@
 package io.freefair.util.function;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-
-import static lombok.AccessLevel.PRIVATE;
+import lombok.experimental.UtilityClass;
 
 /**
  * Static methods for creating {@link Supplier Suppliers}
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-@NoArgsConstructor(access = PRIVATE)
+@UtilityClass
 public final class Suppliers {
 
     /**
@@ -21,7 +19,7 @@ public final class Suppliers {
      * @param object The object to supply
      * @return A {@link Supplier} supplying the given object
      */
-    @NotNull
+    @NonNull
     public static <T> Supplier<T> of(final T object) {
         return new Supplier<T>() {
             @Override
@@ -36,7 +34,7 @@ public final class Suppliers {
      *
      * @param supplier The supplier to cache. {@link Supplier#get() get()} will only called once on this.
      */
-    @NotNull
+    @NonNull
     public static <T> Supplier<T> cache(final Supplier<T> supplier) {
         if (supplier instanceof SupplierCachingSupplier)
             return supplier;

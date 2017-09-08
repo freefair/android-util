@@ -1,6 +1,6 @@
 package io.freefair.util.function;
 
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Represents a function that accepts one argument and produces a result.

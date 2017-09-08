@@ -1,16 +1,14 @@
 package io.freefair.util.function;
 
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.Nullable;
 
-import lombok.NoArgsConstructor;
-
-import static lombok.AccessLevel.PRIVATE;
+import lombok.experimental.UtilityClass;
 
 /**
  * Static methods for creating {@link Function functions}
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-@NoArgsConstructor(access = PRIVATE)
+@UtilityClass
 public class Functions {
 
     private static final Function<?, ?> IDENTITY = new Function() {
