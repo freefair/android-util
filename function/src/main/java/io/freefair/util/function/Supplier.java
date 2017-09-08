@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 /**
  * Represents a supplier of results.
- * <p/>
+ * <p>
  * There is no requirement that a new or distinct result be returned each time the supplier is invoked.
  *
  * @param <T> the type of results supplied by this supplier

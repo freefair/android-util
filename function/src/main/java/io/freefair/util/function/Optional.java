@@ -8,10 +8,10 @@ import java.util.NoSuchElementException;
 /**
  * A container object which may or may not contain a non-null value.
  * If a value is present, {@link #isPresent()} will return true and {@link #get()} will return the value.
- * <p/>
+ * <p>
  * Additional methods that depend on the presence or absence of a contained value are provided,
  * such as {@link #orElse(Object)} (return a default value if value not present).
- * <p/>
+ * <p>
  * This is a value-based class; use of identity-sensitive operations (including reference equality (==), identity hash code, or synchronization) on instances of Optional may have unpredictable results and should be avoided.
  *
  * @param <T> The type of the contained value.
@@ -162,7 +162,6 @@ public class Optional<T> {
 
     /**
      * Indicates whether some other object is "equal to" this Optional. The other object is considered equal if:
-     * <p/>
      * <ul>
      * <li>it is also an Optional and;</li>
      * <li>both instances have no value present or;</li>

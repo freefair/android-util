@@ -55,7 +55,7 @@ public class Consumers {
 
     /**
      * Create a {@link Consumer} which represents the given predicate.
-     * <p/>
+     * <p>
      * The return value of {@link Predicate#test(Object)} is ignored.
      *
      * @param predicate the predicate to convert.
@@ -74,7 +74,7 @@ public class Consumers {
 
     /**
      * Create a {@link Consumer} which represents the given function.
-     * <p/>
+     * <p>
      * The return value of {@link Function#apply(Object)} is ignored.
      *
      * @param function the function to convert.

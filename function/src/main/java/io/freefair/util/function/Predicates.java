@@ -125,7 +125,7 @@ public final class Predicates {
     /**
      * Returns a composed predicate that represents a short-circuiting logical AND of two predicates.
      * When evaluating the composed predicate, if the first predicate is false, then the second predicate is not evaluated.
-     * <p/>
+     * <p>
      * Any exceptions thrown during evaluation of either predicate are relayed to the caller;
      * if evaluation of the first predicate throws an exception, the second predicate will not be evaluated.
      *
@@ -147,7 +147,7 @@ public final class Predicates {
     /**
      * Returns a composed predicate that represents a short-circuiting logical OR of two predicates.
      * When evaluating the composed predicate, if the first predicate is true, then the second predicate is not evaluated.
-     * <p/>
+     * <p>
      * Any exceptions thrown during evaluation of either predicate are relayed to the caller;
      * if evaluation of the first predicate throws an exception, the second predicate will not be evaluated.
      *
@@ -184,10 +184,11 @@ public final class Predicates {
 
         @NonNull
         public static <X> Predicate<X> of(Predicate<X> predicate) {
-            if (predicate instanceof NotPredicate)
+            if (predicate instanceof NotPredicate) {
                 return ((NotPredicate<X>) predicate).inner;
-            else
+            } else {
                 return new NotPredicate<>(predicate);
+            }
         }
     }
 }
