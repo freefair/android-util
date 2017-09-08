@@ -5,8 +5,18 @@ import android.support.annotation.Nullable;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class ConsumersTest {
+    @Test
+    public void testNothing() throws Exception {
+        Object object = mock(Object.class);
+
+        Consumers.nothing().accept(object);
+
+        verifyZeroInteractions(object);
+    }
 
     @Test
     public void testChain() throws Exception {
