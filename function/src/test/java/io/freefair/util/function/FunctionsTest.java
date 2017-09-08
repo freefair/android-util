@@ -7,52 +7,51 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FunctionsTest {
 
-	@Test
-	public void testIdentity() throws Exception {
-		Collection<Object> objects = new ArrayList<>();
+    @Test
+    public void testIdentity() throws Exception {
+        Collection<Object> objects = new ArrayList<>();
 
-		objects.add("Hallo");
-		objects.add(55);
-		objects.add(new ArithmeticException());
+        objects.add("Hallo");
+        objects.add(55);
+        objects.add(new ArithmeticException());
 
-		Function<Object, Object> identity = io.freefair.util.function.Functions.identity();
+        Function<Object, Object> identity = Functions.identity();
 
-		for (Object obj : objects) {
-			assertSame(obj, identity.apply(obj));
-		}
+        for (Object obj : objects) {
+            assertThat(identity.apply(obj)).isSameAs(obj);
+        }
 
-	}
+    }
 
-	@Test
-	public void testChain() throws Exception {
-		Function<Integer, Integer> a = new Function<Integer, Integer>() {
-			@Nullable
-			@Override
-			public Integer apply(@Nullable Integer value) {
-				return value * 3;
-			}
-		};
+    @Test
+    public void testChain() throws Exception {
+        Function<Integer, Integer> a = new Function<Integer, Integer>() {
+            @Nullable
+            @Override
+            public Integer apply(@Nullable Integer value) {
+                return value * 3;
+            }
+        };
 
-		Function<Integer, Integer> b = new Function<Integer, Integer>() {
-			@Nullable
-			@Override
-			public Integer apply(@Nullable Integer value) {
-				return value + 3;
-			}
-		};
+        Function<Integer, Integer> b = new Function<Integer, Integer>() {
+            @Nullable
+            @Override
+            public Integer apply(@Nullable Integer value) {
+                return value + 3;
+            }
+        };
 
-		Function<Integer, Integer> chain1 = io.freefair.util.function.Functions.chain(a, b);
-		Function<Integer, Integer> chain2 = Functions.chain(b, a);
+        Function<Integer, Integer> chain1 = Functions.chain(a, b);
+        Function<Integer, Integer> chain2 = Functions.chain(b, a);
 
-		for (int i = -3; i < 3; i++) {
-			assertEquals((i*3)+3,(int)chain1.apply(i));
-			assertEquals((i+3)*3,(int)chain2.apply(i));
-		}
+        for (int i = -3; i < 3; i++) {
+            assertThat(chain1.apply(i)).isEqualTo((i * 3) + 3);
+            assertThat(chain2.apply(i)).isEqualTo((i + 3) * 3);
+        }
 
-	}
+    }
 }

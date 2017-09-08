@@ -2,32 +2,33 @@ package io.freefair.util.function;
 
 import org.junit.Test;
 
-import io.freefair.util.function.Suppliers;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class CachingSupplierTest {
 
-	@Test
-	public void testGet() throws Exception {
-		Supplier innerSupplier = mock(Supplier.class);
+    @Test
+    public void testGet() throws Exception {
+        Supplier innerSupplier = mock(Supplier.class);
 
-		when(innerSupplier.get()).thenReturn("Hallo");
+        when(innerSupplier.get()).thenReturn("Hallo");
 
-		Supplier cache = Suppliers.cache(innerSupplier);
+        Supplier cache = Suppliers.cache(innerSupplier);
 
-		Object a = cache.get();
-		Object b = cache.get();
-		Object c = cache.get();
+        Object a = cache.get();
+        Object b = cache.get();
+        Object c = cache.get();
 
-		verify(innerSupplier, atMost(1)).get();
+        verify(innerSupplier, atMost(1)).get();
 
-		assertSame(a, b);
-		assertSame(b, c);
+        assertThat(a).isSameAs(b);
+        assertThat(b).isSameAs(c);
 
-		assertEquals("Hallo", a);
-		assertEquals("Hallo", b);
-		assertEquals("Hallo", c);
-	}
+        assertThat(a).isEqualTo("Hallo");
+        assertThat(b).isEqualTo("Hallo");
+        assertThat(c).isEqualTo("Hallo");
+    }
 }

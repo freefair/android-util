@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConsumersTest {
 
@@ -32,6 +32,6 @@ public class ConsumersTest {
 
         Consumers.chain(first, second).accept(sb);
 
-        assertEquals("ab", sb.toString());
+        assertThat(sb.toString()).isEqualTo("ab");
     }
 }

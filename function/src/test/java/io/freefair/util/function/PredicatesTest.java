@@ -2,42 +2,41 @@ package io.freefair.util.function;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PredicatesTest {
 
-	@Test
-	public void testAlwaysTrue() {
-		Predicate<Object> alwaysTrue = Predicates.alwaysTrue();
+    @Test
+    public void testAlwaysTrue() {
+        Predicate<Object> alwaysTrue = Predicates.alwaysTrue();
 
-		assertTrue(alwaysTrue.test(null));
-		assertTrue(alwaysTrue.test("Hallo"));
-		assertTrue(alwaysTrue.test(55l));
-	}
+        assertThat(alwaysTrue.test(null)).isTrue();
+        assertThat(alwaysTrue.test("Hallo")).isTrue();
+        assertThat(alwaysTrue.test(55l)).isTrue();
+    }
 
-	@Test
-	public void testAlwaysFalse() {
-		Predicate<Object> alwaysFalse = Predicates.alwaysFalse();
+    @Test
+    public void testAlwaysFalse() {
+        Predicate<Object> alwaysFalse = Predicates.alwaysFalse();
 
-		assertFalse(alwaysFalse.test(null));
-		assertFalse(alwaysFalse.test("FooBar"));
-		assertFalse(alwaysFalse.test(66d));
-	}
+        assertThat(alwaysFalse.test(null)).isFalse();
+        assertThat(alwaysFalse.test("FooBar")).isFalse();
+        assertThat(alwaysFalse.test(66d)).isFalse();
+    }
 
-	@Test
-	public void testNotNull() throws Exception {
-		Predicate<Object> notNull = Predicates.notNull();
+    @Test
+    public void testNotNull() throws Exception {
+        Predicate<Object> notNull = Predicates.notNull();
 
-		assertTrue(notNull.test("Hallo"));
-		assertFalse(notNull.test(null));
-	}
+        assertThat(notNull.test("Hallo")).isTrue();
+        assertThat(notNull.test(null)).isFalse();
+    }
 
-	@Test
-	public void testIsNull() throws Exception {
-		Predicate<Object> isNull = Predicates.isNull();
+    @Test
+    public void testIsNull() throws Exception {
+        Predicate<Object> isNull = Predicates.isNull();
 
-		assertTrue(isNull.test(null));
-		assertFalse(isNull.test("test"));
-	}
+        assertThat(isNull.test(null)).isTrue();
+        assertThat(isNull.test("test")).isFalse();
+    }
 }
