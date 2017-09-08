@@ -5,15 +5,13 @@ import android.support.annotation.Nullable;
 
 import java.util.Objects;
 
-import lombok.NoArgsConstructor;
-
-import static lombok.AccessLevel.PRIVATE;
+import lombok.experimental.UtilityClass;
 
 /**
  * Static methods for creating or obtaining {@link Predicate Predicates}
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-@NoArgsConstructor(access = PRIVATE)
+@UtilityClass
 public final class Predicates {
 
     private static final Predicate<?> TRUE = new Predicate<Object>() {

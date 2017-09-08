@@ -3,16 +3,14 @@ package io.freefair.util.function;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-
-import static lombok.AccessLevel.PRIVATE;
+import lombok.experimental.UtilityClass;
 
 /**
  * Static methods for creating {@link Supplier Suppliers}
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-@NoArgsConstructor(access = PRIVATE)
+@UtilityClass
 public final class Suppliers {
 
     /**

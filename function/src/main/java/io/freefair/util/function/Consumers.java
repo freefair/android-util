@@ -2,15 +2,13 @@ package io.freefair.util.function;
 
 import android.support.annotation.NonNull;
 
-import lombok.NoArgsConstructor;
-
-import static lombok.AccessLevel.PRIVATE;
+import lombok.experimental.UtilityClass;
 
 /**
  * Static functions for creating Consumers
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-@NoArgsConstructor(access = PRIVATE)
+@UtilityClass
 public class Consumers {
 
     private static final Consumer<?> NOTHING = new Consumer<Object>() {
