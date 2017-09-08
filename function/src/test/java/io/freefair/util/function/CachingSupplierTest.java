@@ -11,11 +11,11 @@ public class CachingSupplierTest {
 
 	@Test
 	public void testGet() throws Exception {
-		io.freefair.util.function.Supplier innerSupplier = mock(io.freefair.util.function.Supplier.class);
+		Supplier innerSupplier = mock(Supplier.class);
 
 		when(innerSupplier.get()).thenReturn("Hallo");
 
-		io.freefair.util.function.Supplier cache = Suppliers.cache(innerSupplier);
+		Supplier cache = Suppliers.cache(innerSupplier);
 
 		Object a = cache.get();
 		Object b = cache.get();

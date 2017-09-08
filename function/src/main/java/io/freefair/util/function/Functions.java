@@ -1,6 +1,6 @@
 package io.freefair.util.function;
 
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 import lombok.NoArgsConstructor;
 

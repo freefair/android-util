@@ -1,12 +1,11 @@
 package io.freefair.util.function;
 
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.Nullable;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import io.freefair.util.function.Functions;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -21,7 +20,7 @@ public class FunctionsTest {
 		objects.add(55);
 		objects.add(new ArithmeticException());
 
-		io.freefair.util.function.Function<Object, Object> identity = io.freefair.util.function.Functions.identity();
+		Function<Object, Object> identity = io.freefair.util.function.Functions.identity();
 
 		for (Object obj : objects) {
 			assertSame(obj, identity.apply(obj));
@@ -31,7 +30,7 @@ public class FunctionsTest {
 
 	@Test
 	public void testChain() throws Exception {
-		io.freefair.util.function.Function<Integer, Integer> a = new io.freefair.util.function.Function<Integer, Integer>() {
+		Function<Integer, Integer> a = new Function<Integer, Integer>() {
 			@Nullable
 			@Override
 			public Integer apply(@Nullable Integer value) {
@@ -39,7 +38,7 @@ public class FunctionsTest {
 			}
 		};
 
-		io.freefair.util.function.Function<Integer, Integer> b = new io.freefair.util.function.Function<Integer, Integer>() {
+		Function<Integer, Integer> b = new Function<Integer, Integer>() {
 			@Nullable
 			@Override
 			public Integer apply(@Nullable Integer value) {
@@ -47,8 +46,8 @@ public class FunctionsTest {
 			}
 		};
 
-		io.freefair.util.function.Function<Integer, Integer> chain1 = io.freefair.util.function.Functions.chain(a, b);
-		io.freefair.util.function.Function<Integer, Integer> chain2 = Functions.chain(b, a);
+		Function<Integer, Integer> chain1 = io.freefair.util.function.Functions.chain(a, b);
+		Function<Integer, Integer> chain2 = Functions.chain(b, a);
 
 		for (int i = -3; i < 3; i++) {
 			assertEquals((i*3)+3,(int)chain1.apply(i));

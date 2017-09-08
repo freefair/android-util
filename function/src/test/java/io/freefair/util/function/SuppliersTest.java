@@ -21,7 +21,7 @@ public class SuppliersTest {
 		objects.add(new ArithmeticException());
 
 		for (Object obj : objects) {
-			assertSame(obj, io.freefair.util.function.Suppliers.of(obj).get());
+			assertSame(obj, Suppliers.of(obj).get());
 		}
 
 

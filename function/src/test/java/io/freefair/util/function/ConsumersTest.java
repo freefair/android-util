@@ -1,9 +1,8 @@
 package io.freefair.util.function;
 
-import org.jetbrains.annotations.Nullable;
-import org.junit.Test;
+import android.support.annotation.Nullable;
 
-import io.freefair.util.function.Consumers;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,7 +12,7 @@ public class ConsumersTest {
     public void testChain() throws Exception {
         StringBuilder sb = new StringBuilder();
 
-        io.freefair.util.function.Consumer<StringBuilder> first = new io.freefair.util.function.Consumer<StringBuilder>() {
+        Consumer<StringBuilder> first = new Consumer<StringBuilder>() {
             @Override
             public void accept(@Nullable StringBuilder value) {
                 if (value != null) {
@@ -22,7 +21,7 @@ public class ConsumersTest {
             }
         };
 
-        io.freefair.util.function.Consumer<StringBuilder> second = new io.freefair.util.function.Consumer<StringBuilder>() {
+        Consumer<StringBuilder> second = new Consumer<StringBuilder>() {
             @Override
             public void accept(@Nullable StringBuilder value) {
                 if (value != null) {
