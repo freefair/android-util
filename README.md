@@ -1,4 +1,7 @@
-# android-util [![Build Status](https://travis-ci.org/freefair/android-util.svg?branch=master)](https://travis-ci.org/freefair/android-util)
+# android-util 
+
+[![Build Status](https://travis-ci.org/freefair/android-util.svg?branch=master)](https://travis-ci.org/freefair/android-util)
+[![](https://jitpack.io/v/io.freefair/android-util.svg)](https://jitpack.io/#io.freefair/android-util)
 
 Android Utility classes
 
